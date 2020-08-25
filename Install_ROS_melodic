@@ -30,8 +30,7 @@ cd ~/ros_catkin_ws
 rosinstall_generator ros_comm ros_control joystick_drivers --rosdistro melodic --deps --wet-only --tar > melodic-custom_ros.rosinstall
 wstool merge -t src melodic-custom_ros.rosinstall
 wstool update -t src
-rosdep install --from-paths src --ignore-src --rosdistro melodic -y -r --os=debian:buster
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic
+
 
 
 

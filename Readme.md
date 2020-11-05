@@ -4,6 +4,8 @@
 
 需先安裝 ubuntu server 18.04版本這裡下載  
 http://old-releases.ubuntu.com/releases/18.04.4/   
+
+建議使用有線廣路先ssh連線過去操作比較簡單
 然後透過如下教學 安裝桌面系統
 https://maker.pro/raspberry-pi/projects/install-ubuntu-18044-lts-on-your-raspberry-pi-board
 

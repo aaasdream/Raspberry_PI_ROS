@@ -1,36 +1,33 @@
-#使用官方作業系統 Raspberry Pi OS (32-bit) with desktop and recommended software
-#https://www.raspberrypi.org/downloads/raspberry-pi-os/
-
-
-
+#!/bin/bash
+# 這是自動安裝ROS Ubuntu 18 ，ROS Melodic
+sudo apt install -y curl
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install -y python-rosdep python-rosinstall-generator python-wstool python-rosinstall build-essential cmake
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+curl -sSL 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC1CF6E31E6BADE8868B172B4F42ED6FBAB17C654' | sudo apt-key add -
+sudo apt update
+
+sudo apt install -y python-rosdep python-rosinstall python-rosinstall-generator python-wstool  build-essential
+sudo apt install -y ros-melodic-desktop --fix-missing
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+source /opt/ros/melodic/setup.bash
+sudo apt install python-rosdep
+
 sudo rosdep init
 rosdep update
 
-mkdir -p ~/ros_catkin_ws
-cd ~/ros_catkin_ws
+#建立工作資料夾
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws/
+catkin_make
+ 
 
-rosinstall_generator desktop --rosdistro melodic --deps --wet-only --tar > melodic-desktop-wet.rosinstall
-wstool init src melodic-desktop-wet.rosinstall
+source devel/setup.bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-cd ~/ros_catkin_ws
-rosdep install -y --from-paths src --ignore-src --rosdistro melodic -r --os=debian:buster
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic -j2
+sudo apt-get  -y install ros-$ROS_DISTRO-usb-cam
 
-source /opt/ros/melodic/setup.bash
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-
-
-
-cd ~/ros_catkin_ws
-rosinstall_generator ros_comm ros_control joystick_drivers --rosdistro melodic --deps --wet-only --tar > melodic-custom_ros.rosinstall
-wstool merge -t src melodic-custom_ros.rosinstall
-wstool update -t src
-
-
-
-
+#echo "Finish. test roscore"
+roscore

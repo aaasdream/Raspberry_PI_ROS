@@ -1,0 +1,8 @@
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+ls -lh /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon -show
+#長期使用
+#sudo bash -c 'echo "/var/swapfile swap swap defaults 0 0" >> /etc/fstab'

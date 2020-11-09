@@ -25,7 +25,7 @@ wstool merge -t src https://raw.githubusercontent.com/cartographer-project/carto
 wstool update -t src
 
 
-sudo apt-get install stow
+sudo apt-get -y install stow
 sudo chmod +x ~/catkin_google_ws/src/cartographer/scriptsinstall_abseil.sh
 cd ~/catkin_google_ws/src/cartographer/scripts
 ./install_abseil.sh

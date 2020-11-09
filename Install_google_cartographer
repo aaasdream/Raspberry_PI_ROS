@@ -26,9 +26,9 @@ wstool update -t src
 
 
 sudo apt-get -y install stow
-sudo chmod +x ~/catkin_google_ws/src/cartographer/scriptsinstall_abseil.sh
-cd ~/catkin_google_ws/src/cartographer/scripts
-./install_abseil.sh
+sudo chmod +x ~/catkin_google_ws/src/cartographer/scripts/install_abseil.sh 
+cd ~/catkin_google_ws/src/cartographer/scripts/
+./install_abseil.sh 
 
 
 cd ~/catkin_google_ws
